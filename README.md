@@ -18,7 +18,7 @@ Likewise, if the ````text```` is invalid, the function throws an ````InvalidStri
 ### strip(language, text)
 Strips all invalid characters from a string with a specified language, in this case either Morse or English. See usage for examples.  
 If the ````language```` is neither Morse nor English, the function throws an ````UnsupportedLanguage```` error.  
-# Usage
+# Methods
 ```swift
 import SwiftyMorse
 SwiftyMorse.translateTo("Morse", "Hi there") // returns ".... .. / - .... . .-. ."
