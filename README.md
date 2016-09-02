@@ -8,8 +8,8 @@ Add this to your Cartfile:
 In a workspace, add SwiftyMorse.xcodeproj to your root project directory.  
 In a project, add the SwiftyMorse.swift file to the project tree.
 # Requirements
-iOS 7.0+ / OS X 10.9+
-Xcode 7
+- iOS 7.0+ / OS X 10.9+
+- Xcode 7
 # Usage
 ```swift
 import SwiftyMorse
