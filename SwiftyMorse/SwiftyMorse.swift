@@ -7,6 +7,10 @@
 //
 
 import Foundation
+private enum Errors: ErrorType {
+    case UnsupportedLanguage(language: String)
+    case InvalidString(text: String)
+}
 private let abcToMorse = [
     "A": ".-",
     "B": "-...",
@@ -85,7 +89,7 @@ private let morseToAbc = [
     "----.": "9",
     "/": " "
 ]
-public func strip(lang: String, text: String) -> String {
+public func strip(lang: String, text: String) throws -> String {
     switch(lang) {
     case "Morse":
         var newCharArray = [Character]()
@@ -126,32 +130,34 @@ public func strip(lang: String, text: String) -> String {
             return String(newCharArray)
         }
     default:
-        return "Error: Language \(lang) is not a supported language. Did you misspell something?"
+        throw Errors.UnsupportedLanguage(language: lang)
     }
 }
-public func translateTo(lang: String, text: String) -> String {
+public func translateTo(lang: String, text: String) throws -> String {
     switch(lang) {
     case "Morse":
-        return translateMorse(Array(text.uppercaseString.characters))
+        return try translateMorse(Array(text.uppercaseString.characters))
     case "English":
         let morseChars = text.componentsSeparatedByString(" ")
-        return translateEng(morseChars)
+        return try translateEng(morseChars)
     default:
-        return "Error: Language \(lang) is not a supported language. Did you misspell something?"
+        throw Errors.UnsupportedLanguage(language: lang)
     }
 }
 // returns empty string if not valid
-private func translateEng(morseChars: [String]) -> String {
+private func translateEng(morseChars: [String]) throws -> String {
     var retString: String = ""
     if validMorseChars(morseChars) {
         for key in morseChars {
             retString += morseToAbc[key]!
         }
+        return retString
+    } else {
+        throw Errors.InvalidString(text: String(morseChars))
     }
-    return retString
 }
 // returns empty string if not valid
-private func translateMorse(engChars: [Character]) -> String {
+private func translateMorse(engChars: [Character]) throws -> String {
     var retString: String = ""
     if validEngChars(engChars) {
         for (i, key) in engChars.enumerate() {
@@ -160,8 +166,10 @@ private func translateMorse(engChars: [Character]) -> String {
                 retString += " "
             }
         }
+        return retString
+    } else {
+        throw Errors.InvalidString(text: String(engChars))
     }
-    return retString
 }
 private func validEngChars(engChars: [Character]) -> Bool {
     for char in engChars {

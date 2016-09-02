@@ -14,30 +14,46 @@ class SwiftyMorseTests: QuickSpec {
     override func spec() {
         describe("translateTo") {
             it("translates morse code to english") {
-                expect(SwiftyMorse.translateTo("English", text: ".... . .-.. .-.. --- / .-- --- .-. .-.. -..")).to(equal("HELLO WORLD"))
+                expect{
+                    try SwiftyMorse.translateTo("English", text: ".... . .-.. .-.. --- / .-- --- .-. .-.. -..")
+                }.to(equal("HELLO WORLD"))
             }
             it("catches invalid morse code characters") {
-                expect(SwiftyMorse.translateTo("English", text: "This is an invalid string because of the english characters.")).to(equal(""))
+                expect {
+                    try SwiftyMorse.translateTo("English", text: "This is an invalid string because of the english characters.")
+                }.to(throwError())
             }
-            it("translaSwiftytes english to morse code") {
-                expect(SwiftyMorse.translateTo("Morse", text: "Hello world")).to(equal(".... . .-.. .-.. --- / .-- --- .-. .-.. -.."))
+            it("translates english to morse code") {
+                expect {
+                    try SwiftyMorse.translateTo("Morse", text: "Hello world")
+                }.to(equal(".... . .-.. .-.. --- / .-- --- .-. .-.. -.."))
             }
             it("catches invalid english characters") {
-                expect(SwiftyMorse.translateTo("Morse", text: "This is an invalid string because of the punctuation!")).to(equal(""))
+                expect {
+                    try SwiftyMorse.translateTo("Morse", text: "This is an invalid string because of the punctuation!")
+                }.to(throwError())
             }
             it("catches invalid languages") {
-                expect(SwiftyMorse.translateTo("Gibberish", text: "The input string doesn't matter.")).to(equal("Error: Language Gibberish is not a supported language. Did you misspell something?"))
+                expect {
+                    try SwiftyMorse.translateTo("Gibberish", text: "The input string doesn't matter.")
+                    }.to(throwError())
             }
         }
         describe("strip") {
             it("removes invalid morse code characters") {
-                expect(SwiftyMorse.strip("Morse", text: "Strip all of this.")).to(equal("."))
+                expect {
+                    try SwiftyMorse.strip("Morse", text: "Strip all of this.")
+                }.to(equal("."))
             }
             it("removes invalid morse code characters pt 2") {
-                expect(SwiftyMorse.strip("Morse", text: "fjljdagdl gadigldfj g g g g g g g  gs.-")).to(equal(".-"))
+                expect {
+                  try SwiftyMorse.strip("Morse", text: "fjljdagdl gadigldfj g g g g g g g  gs.- / .-")
+                }.to(equal(".- / .-"))
             }
             it("catches invalid languages") {
-                expect(SwiftyMorse.strip("Gibberish", text: "The input string doesn't matter.")).to(equal("Error: Language Gibberish is not a supported language. Did you misspell something?"))
+                expect {
+                    try SwiftyMorse.strip("Gibberish", text: "The input string doesn't matter.")
+                    }.to(throwError())
             }
         }
     }
