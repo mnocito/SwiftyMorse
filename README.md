@@ -26,5 +26,5 @@ Translate a string to a language, in this case either Morse or English.
 If the ````language```` is neither Morse nor English, the function throws an ````UnsupportedLanguage```` error.  
 Likewise, if the ````text```` is invalid, the function throws an ````InvalidString```` error. See usage for examples.
 ### strip(language, text)
-Strips all invalid characters from a string with a specified language, in this case either Morse or English.
+Strips all invalid characters from a string with a specified language, in this case either Morse or English.  
 If the ````language```` is neither Morse nor English, the function throws an ````UnsupportedLanguage```` error. See usage for examples.
