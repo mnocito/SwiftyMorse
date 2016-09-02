@@ -23,8 +23,8 @@ let validMorseText = SwiftyMorse.strip("Morse", invalidMorseText) // returns ".-
 # Methods
 ### translateTo(language, text)
 Translate a string to a language, in this case either Morse or English.  
-If the ````language```` is neither Morse nor English, the function throws an ````UnsupportedLanguage```` error. See usage for examples. 
-Likewise, if the ````text```` is invalid, the function throws an ````InvalidString```` error.
-### strip(language, text)
-Strips all invalid characters from a string with a specified language, in this case either Morse or English. See usage for examples.  
 If the ````language```` is neither Morse nor English, the function throws an ````UnsupportedLanguage```` error.  
+Likewise, if the ````text```` is invalid, the function throws an ````InvalidString```` error. See usage for examples.
+### strip(language, text)
+Strips all invalid characters from a string with a specified language, in this case either Morse or English.
+If the ````language```` is neither Morse nor English, the function throws an ````UnsupportedLanguage```` error. See usage for examples.
